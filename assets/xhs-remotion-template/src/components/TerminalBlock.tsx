@@ -10,21 +10,21 @@ export const TerminalBlock: React.FC<{ lines: TerminalLine[] }> = ({ lines }) =>
     <div
       style={{
         background: "#12141C",
-        borderRadius: 24,
-        padding: 40,
-        boxShadow: "0 30px 60px rgba(0,0,0,0.15)",
+        borderRadius: 22,
+        padding: 32,
+        boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
         fontFamily:
           "JetBrains Mono, Fira Code, Menlo, Monaco, Consolas, monospace",
         width: "100%"
       }}
     >
-      <div style={{ display: "flex", gap: 12, marginBottom: 32 }}>
-        <div style={{ width: 16, height: 16, borderRadius: 999, background: "#FF5F56" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 999, background: "#FFBD2E" }} />
-        <div style={{ width: 16, height: 16, borderRadius: 999, background: "#27C93F" }} />
+      <div style={{ display: "flex", gap: 8, marginBottom: 22 }}>
+        <div style={{ width: 10, height: 10, borderRadius: 999, background: "#FF5F56" }} />
+        <div style={{ width: 10, height: 10, borderRadius: 999, background: "#FFBD2E" }} />
+        <div style={{ width: 10, height: 10, borderRadius: 999, background: "#27C93F" }} />
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 26, lineHeight: 1.8, letterSpacing: 0.5 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 24, lineHeight: 1.85, letterSpacing: 0.3 }}>
         {lines.map((line, index) => {
           if (line.type === "empty") return <div key={index} style={{ height: 24 }} />;
           if (line.type === "comment") {

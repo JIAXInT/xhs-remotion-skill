@@ -7,6 +7,7 @@ import { CompareSlide } from "./slides/CompareSlide";
 import { SimpleTextSlide } from "./slides/SimpleTextSlide";
 import { PointsSlide } from "./slides/PointsSlide";
 import { TerminalSlide } from "./slides/TerminalSlide";
+import { TimelineSlide } from "./slides/TimelineSlide";
 
 const REGISTRY: Record<string, any> = {
   COVER: CoverSlide,
@@ -17,7 +18,8 @@ const REGISTRY: Record<string, any> = {
   COMPARE: CompareSlide,
   POINTS: PointsSlide,
   TERMINAL: TerminalSlide,
-  SIMPLE: SimpleTextSlide
+  SIMPLE: SimpleTextSlide,
+  TIMELINE: TimelineSlide
 };
 
 export const resolveSlideComponent = (slide: any) => {
@@ -31,6 +33,7 @@ export const resolveSlideComponent = (slide: any) => {
   if (slide.steps) return StepsSlide;
   if (slide.quote) return QuoteSlide;
   if (slide.lines) return TerminalSlide;
+  if (slide.timeline) return TimelineSlide;
   if (slide.items && (slide.summary?.highlight || slide.summary?.desc)) return PointsSlide;
   if (slide.items) return ListSlide;
   return SimpleTextSlide;

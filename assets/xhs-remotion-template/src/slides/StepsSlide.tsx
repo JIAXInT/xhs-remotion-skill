@@ -2,32 +2,55 @@ import React from "react";
 import { SlideLayout } from "../SlideLayout";
 
 export const StepsSlide: React.FC<{ data: any }> = ({ data }) => {
+  const t = data.theme || {};
   return (
     <SlideLayout tag={data.tag} page={data.page} theme={data.theme}>
-      <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-        <h2 style={{ fontSize: 64, fontWeight: 900, margin: "0 0 36px" }}>
-          {data.title}
-        </h2>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%"
+        }}
+      >
+        <div style={{ marginBottom: 22 }}>
+          <h2 style={{ fontSize: 58, fontWeight: 900, margin: 0 }}>{data.title}</h2>
+          <div
+            style={{
+              height: 1,
+              background: t.border || "#E5E7EB",
+              opacity: 0.6,
+              marginTop: 14
+            }}
+          />
+        </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: 14
+          }}
+        >
           {data.steps?.map((step: string, i: number) => (
             <div
               key={i}
               style={{
-                background: "#FFFFFF",
-                borderRadius: 28,
-                padding: "24px 28px",
-                border: "1px solid #EEF0F3",
+                background: t.surface || "#FFFFFF",
+                borderRadius: 24,
+                padding: "20px 24px",
+                border: `1px solid ${t.border || "#EEF0F3"}`,
                 display: "flex",
                 alignItems: "center",
-                gap: 20,
-                boxShadow: "0 8px 20px rgba(0,0,0,0.06)"
+                gap: 16,
+                boxShadow: t.shadow || "0 8px 20px rgba(0,0,0,0.06)"
               }}
             >
               <div
                 style={{
-                  width: 52,
-                  height: 52,
+                  width: 46,
+                  height: 46,
                   borderRadius: 999,
                   background: data.theme?.primary || "#00C48C",
                   color: "#fff",
@@ -35,12 +58,12 @@ export const StepsSlide: React.FC<{ data: any }> = ({ data }) => {
                   alignItems: "center",
                   justifyContent: "center",
                   fontWeight: 900,
-                  fontSize: 24
+                  fontSize: 22
                 }}
               >
                 {i + 1}
               </div>
-              <div style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.4 }}>
+              <div style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.45 }}>
                 {step}
               </div>
             </div>
@@ -50,13 +73,13 @@ export const StepsSlide: React.FC<{ data: any }> = ({ data }) => {
         {data.summary ? (
           <div
             style={{
-              marginTop: "auto",
-              fontSize: 28,
-              color: "#6B7280",
-              background: "#FFFFFF",
-              borderRadius: 20,
-              padding: "20px 24px",
-              border: "1px dashed #E5E7EB"
+              marginTop: 18,
+              fontSize: 26,
+              color: t.muted || "#6B7280",
+              background: t.surface || "#FFFFFF",
+              borderRadius: 18,
+              padding: "18px 22px",
+              border: `1px dashed ${t.border || "#E5E7EB"}`
             }}
           >
             {data.summary}

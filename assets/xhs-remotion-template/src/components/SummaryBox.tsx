@@ -4,7 +4,9 @@ export const SummaryBox: React.FC<{
   label: string;
   highlight: string;
   desc?: string;
-}> = ({ label, highlight, desc }) => {
+  theme?: any;
+}> = ({ label, highlight, desc, theme }) => {
+  const t = theme || {};
   return (
     <div style={{ position: "relative", marginTop: 32 }}>
       <div
@@ -14,7 +16,7 @@ export const SummaryBox: React.FC<{
           top: 0,
           bottom: 0,
           width: 12,
-          background: "#5C67CF",
+          background: t.accent || "#5C67CF",
           borderTopLeftRadius: 16,
           borderBottomLeftRadius: 16,
           zIndex: 2
@@ -22,32 +24,32 @@ export const SummaryBox: React.FC<{
       />
       <div
         style={{
-          background: "#F6F7FE",
+          background: t.surfaceAlt || "#F6F7FE",
           borderRadius: 16,
           padding: "40px 40px 40px 56px",
-          border: "1px solid #EBEFF8",
+          border: `1px solid ${t.border || "#EBEFF8"}`,
           position: "relative",
           zIndex: 1
         }}
       >
         <div
           style={{
-            fontSize: 36,
+            fontSize: 32,
             fontWeight: 900,
             display: "flex",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: 12,
-            marginBottom: 24
+            gap: 10,
+            marginBottom: 18
           }}
         >
-          <span style={{ color: "#0F172A" }}>{label}</span>
+          <span style={{ color: t.text || "#0F172A" }}>{label}</span>
           <span
             style={{
-              background: "#E2E6F9",
-              color: "#5C67CF",
-              padding: "8px 16px",
-              borderRadius: 12
+              background: t.summaryHighlightBg || "#E2E6F9",
+              color: t.accent || "#5C67CF",
+              padding: "6px 12px",
+              borderRadius: 10
             }}
           >
             {highlight}
@@ -56,8 +58,8 @@ export const SummaryBox: React.FC<{
         {desc ? (
           <div
             style={{
-              fontSize: 28,
-              color: "#64748B",
+              fontSize: 26,
+              color: t.muted || "#64748B",
               lineHeight: 1.7,
               whiteSpace: "pre-wrap",
               fontWeight: 500

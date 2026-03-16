@@ -6,7 +6,8 @@ import { postData } from "../data/post.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
-const outDir = path.resolve(projectRoot, "out");
+const themeMode = process.env.REMOTION_THEME === "dark" ? "dark" : "light";
+const outDir = path.resolve(projectRoot, themeMode === "dark" ? "out-dark" : "out");
 
 if (!existsSync(outDir)) mkdirSync(outDir);
 
@@ -14,5 +15,5 @@ postData.slides.forEach((_, i) => {
   const id = `Slide-${i + 1}`;
   const outFile = path.join(outDir, `slide-${i + 1}.png`);
   const cmd = `npx remotion still src/index.tsx ${id} "${outFile}"`;
-  execSync(cmd, { stdio: "inherit", cwd: projectRoot });
+  execSync(cmd, { stdio: "inherit", cwd: projectRoot, env: { ...process.env } });
 });

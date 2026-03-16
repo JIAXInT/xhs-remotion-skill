@@ -8,13 +8,14 @@ export const RemotionRoot: React.FC = () => {
     <>
       {postData.slides.map((slide: any, index: number) => {
         const Component = resolveSlideComponent(slide);
+        const slideData = { ...slide, theme: slide.theme || postData.theme };
 
         return (
           <Still
             key={index}
             id={`Slide-${index + 1}`}
             component={Component}
-            defaultProps={{ data: slide }}
+            defaultProps={{ data: slideData }}
             width={1080}
             height={1440}
           />
