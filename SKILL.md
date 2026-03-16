@@ -32,7 +32,15 @@ Create XHS-style static image sets with Remotion Still (React-based). This skill
 ## Data schema (data/post.js)
 - `theme`: primary/bg/text/accent/dark colors
 - `slides[]`: array of slides
-  - `type`: `COVER` | `LIST` | `HOOK`
+  - `type`: `COVER` | `LIST` | `HOOK` | `QUOTE` | `STEPS` | `COMPARE` | `SIMPLE` | `AUTO`
+  - `AUTO` chooses layout based on fields:
+    - `metrics + title[]` → COVER
+    - `cards` → HOOK
+    - `left/right` → COMPARE
+    - `steps` → STEPS
+    - `quote` → QUOTE
+    - `items` → LIST
+    - fallback → SIMPLE
   - `tag`, `page`, `title`, `subtitle`, `items`, `summary`, `cards`, `cta`
 
 ## Output notes

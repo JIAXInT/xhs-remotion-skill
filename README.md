@@ -38,8 +38,16 @@ npm run render:all
 `data/post.js`：
 - `theme`: 颜色主题（primary/bg/text/accent/dark）
 - `slides[]`: 由多张图组成
-  - `type`: `COVER` | `LIST` | `HOOK`
-  - `tag`、`page`、`title`、`subtitle`、`items`、`summary`、`cards`、`cta`
+  - `type`: `COVER` | `LIST` | `HOOK` | `QUOTE` | `STEPS` | `COMPARE` | `SIMPLE` | `AUTO`
+  - **AUTO** 会根据内容字段自动匹配模板：
+    - `metrics + title[]` → COVER
+    - `cards` → HOOK
+    - `left/right` → COMPARE
+    - `steps` → STEPS
+    - `quote` → QUOTE
+    - `items` → LIST
+    - 其他 → SIMPLE
+  - 常用字段：`tag`、`page`、`title`、`subtitle`、`items`、`summary`、`cards`、`cta`
 
 ## 默认尺寸
 - 1080 × 1440（3:4）
