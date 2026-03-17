@@ -1,55 +1,46 @@
 ---
 name: xhs-remotion-skill
-description: Generate Xiaohongshu (小红书) static image carousels using Remotion Still. Use when asked to create/convert text into XHS 图文套图/封面/内页 PNG, batch export Remotion stills, or set up a Remotion still workflow/template for XHS content.
+description: Generate Xiaohongshu static image carousels with Remotion Still. Use when converting text/chapters into XHS 套图/封面/内页 PNG, batch rendering stills, or setting up the Remotion template (supports chapter auto-split + configurable output dir).
 ---
 
-# XHS Remotion Still
+# XHS Remotion Skill
 
-## Overview
-Create XHS-style static image sets with Remotion Still (React-based). This skill ships a ready-to-use Remotion template plus a bootstrap script for quick setup and batch PNG export.
-
-## Workflow (recommended)
+## Quick start
 1. **Bootstrap template**
    ```bash
    python scripts/bootstrap_template.py --dest <project-path>
    ```
 2. **Edit content**
-   - Update `data/post.js` (theme + slides) in the project.
+   - Update `data/post.js` (cover + chapters).
 3. **Install deps**
    ```bash
    npm i
    ```
-4. **Preview (optional)**
-   ```bash
-   npm run start
-   ```
-5. **Batch export**
-   ```bash
-   npm run render:all
-   ```
-   Output goes to `out/slide-*.png`.
+4. **Batch export**
+   - macOS/Linux:
+     ```bash
+     REMOTION_OUT_DIR=out-run-001 npm run render:all
+     ```
+   - PowerShell:
+     ```powershell
+     $env:REMOTION_OUT_DIR='out-run-001'; npm run render:all
+     ```
+   Output goes to `out/slide-*.png` (or your custom dir).
 
 ## Data schema (data/post.js)
 - `theme`: primary/bg/text/accent/dark colors
-- `slides[]`: array of slides
-  - `type`: `COVER` | `LIST` | `HOOK` | `QUOTE` | `STEPS` | `COMPARE` | `POINTS` | `SIMPLE` | `AUTO`
-  - `AUTO` chooses layout based on fields:
-    - `metrics + title[]` → COVER
-    - `cards` → HOOK
-    - `left/right` → COMPARE
-    - `steps` → STEPS
-    - `quote` → QUOTE
-    - `items + summary.highlight/desc` → POINTS
-    - `items` → LIST
-    - fallback → SIMPLE
-  - `tag`, `page`, `title`, `subtitle`, `items`, `summary`, `cards`, `cta`
+- `maxItemsPerSlide`, `maxLinesPerSlide`, `maxCharsPerSlide` (default: 8/12/360)
+- `cover`: tag/title/subtitle/metrics/cta
+- `chapters[]`: each chapter becomes 1+ slide; auto-split when items/steps/lines/body exceed thresholds
+  - Fields: `tag`, `title`, `subtitle`, `items`, `steps`, `lines`, `body`, `summary`
+  - Duplicate titles auto-suffixed like `标题（1/2）`
+- `sections[]` or `rawText` are accepted as fallbacks (raw text with ## headings)
 
 ## Output notes
 - Default size: **1080×1440 (3:4)**
-- Auto split thresholds (default): items=8, lines=12, body chars=360
+- Dark mode: set `REMOTION_THEME=dark`
 - Keep key text away from top/bottom edges (safe area ~120px top, ~180px bottom)
 
 ## Resources
 - `scripts/bootstrap_template.py` – copy template to a target directory
 - `assets/xhs-remotion-template/` – Remotion Still project template
-on Still project template

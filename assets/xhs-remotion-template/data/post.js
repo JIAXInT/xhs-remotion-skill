@@ -237,5 +237,3 @@ export const postDataDark = {
 
 export const postData =
   process.env.REMOTION_THEME === "dark" ? postDataDark : postDataLight;
-=
-  process.env.REMOTION_THEME === "dark" ? postDataDark : postDataLight;
